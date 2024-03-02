@@ -43,12 +43,6 @@ HOME/USERS LIST
 
 <script>
   $(function () {
-
-  // $('input[name="daterange"]').daterangepicker({
-  //     startDate: moment().subtract(1, 'M'),
-  //     endDate: moment()
-  // });
-
   var table = $('.data-table').DataTable({
       processing: true,
       serverSide: true,

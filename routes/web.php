@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.landing');
 });
 
 Route::get('/dashboard', function () {
@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/appointment', function () {
-    return view('appointment');
+    return view('pages.appointment');
 });
 
 Route::get('/appointmentpdf', function () {
@@ -72,6 +72,7 @@ Route::middleware('auth',OnlyUser::class)->group(function () {
 Route::middleware('auth',CommonPath::class)->group(function () {
     Route::get('appointment-list/{id}', [AppointmentController::class, 'appointList']);
     Route::get('appointment/list', [ListController::class, 'appointmenlist'])->name('appointment.list');
+    Route::get('appointment/list-all', [ListController::class, 'appointmenlistAll'])->name('appointment.listAll');
     Route::get('medi/list', [ListController::class, 'medicalList'])->name('medical.list');
 });
 

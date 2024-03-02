@@ -80,18 +80,26 @@ class MedicalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
         $medical_center = Medical::find($id);
         if ($request->has('is_active')) {
             $medical_center->is_active = $request->is_active;
             $medical_center->save();
             return redirect()->back()->with('status', 'Successfully Updated!');
         }
+
+        if($request->medical_centre_logo && gettype($request->medical_centre_logo) != 'string') {
+            $fileName = time().'.'.$request->medical_centre_logo->getClientOriginalExtension();
+            $request->medical_centre_logo->move(public_path('/images/medicals'), $fileName);
+        }
+
         $medical_center->medical_centre_name = $request->medical_centre_name;
         $medical_center->medical_centre_email = $request->medical_centre_email;
         $medical_center->website = $request->website;
         $medical_center->medical_centre_address = $request->medical_centre_address;
         $medical_center->medical_centre_mobile = $request->medical_centre_mobile;
+        if($request->medical_centre_logo && gettype($request->medical_centre_logo) != 'string') {
+            $medical_center->medical_centre_logo = '/public/images/medicals/'.$fileName;
+        }
         $medical_center->save();
 
         return redirect()->back()->with('status', 'Successfully Updated!');

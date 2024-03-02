@@ -65,6 +65,19 @@ HOME/EDIT MEDICAL
                     @enderror
                   </div>
                 </div>
+
+                  <div class="row mg-t-20">
+                      <label class="col-sm-4 form-control-label">Upload Logo: <span class="tx-danger">*</span></label>
+                      <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                          <div class="custom-file @error('medical_centre_logo') is-invalid @enderror">
+                              <input type="file" id="file" name="medical_centre_logo" class="custom-file-input" required>
+                              <label class="custom-file-label">Choose File</label>
+                              @error('medical_centre_logo')
+                              <div class="alert alert-danger">{{ $message }}</div>
+                              @enderror
+                          </div>
+                      </div>
+                  </div>
                 {{-- <div class="row mg-t-20">
                     <label class="col-sm-4 form-control-label">Upload Logo: <span class="tx-danger">*</span></label>
                     <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -84,6 +97,6 @@ HOME/EDIT MEDICAL
               </div><!-- form-layout -->
             </div><!-- col-6 -->
           </div>
-        </form>   
+        </form>
     </div>
 @endsection

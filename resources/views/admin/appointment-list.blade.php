@@ -64,7 +64,6 @@ HOME/MEDICAL CENTRE LIST
 <script>
   $(function () {
 
-  // var medical_id = {!! json_encode(10) !!};
   var table = $('.data-table').DataTable({
       processing: true,
       serverSide: true,

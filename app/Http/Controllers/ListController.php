@@ -61,10 +61,27 @@ class ListController extends Controller
                 return view("admin.position",compact("row"));
             })
             ->addColumn('other', function ($row) {
-                return '<a href="'.'/report-entry/'.$row->id.'"><button class="btn btn-primary">Entry Report</button></a>';
+                return '<a href="'.'/report-entry/'.$row->id.'"><button class="btn btn-primary mr-2 mb-2">Entry Report</button></a><a href="'.'/appointment-pdf/'.$row->id.'"><button class="btn btn-primary">View Appointment</button></a>';
             })
             ->rawColumns(['other'])
             ->make(true);
         }
+    }
+
+    public function appointmenlistAll()
+    {
+        $data = Appointment::leftJoin('medicals', 'appointments.medical_id', '=', 'medicals.id')
+            ->select('medicals.medical_centre_name as medical_name', 'appointments.*')
+            ->orderBy('appointments.id', 'desc')
+            ->get();
+
+        return DataTables::of($data)
+            ->addColumn('nationality', function ($row) {
+                return view("admin.nationality",compact("row"));
+            })
+            ->addColumn('position', function ($row) {
+                return view("admin.position",compact("row"));
+            })
+            ->make(true);
     }
 }

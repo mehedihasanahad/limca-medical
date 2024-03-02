@@ -12,11 +12,6 @@
        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <style>
-        @media print{
-   .noprint{
-       display:none;
-   }
-}
         .div-style{
             border-style: solid;
             margin: 0 auto;
@@ -39,51 +34,35 @@
             margin-top: 10px;
             display: inline-block;
         }
+        table {
+            width: 850px !important;
+            color: black;
+            margin-bottom: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         table, th, td {
             border: white;
             border-collapse: collapse;
         }
+        @media print {
+            #btnRow {
+                display: none !important;
+            }
+            #wrapper {
+                overflow: hidden !important;
+            }
+        }
+
+        @page { size: landscape;  margin-top: 1mm; margin-bottom: 1mm;}
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light noprint">
-        <div class="container-fluid">
-          {{-- <a class="navbar-brand" href="#">Navbar w/ text</a> --}}
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                {{-- <a class="nav-link active" aria-current="page" href="#">Home</a> --}}
-                <a class="navbar-brand" href="#">
-                    <img src="{{asset('/images/lim.jpg')}}" alt="" width="100" height="24">
-                  </a>
-              </li>
-              <li class="nav-item">
-                {{-- <a class="nav-link" href="#">Features</a> --}}
-              </li>
-              <li class="nav-item">
-                {{-- <a class="nav-link" href="#">Pricing</a> --}}
-              </li>
-            </ul>
-            <span class="navbar-text">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: red; font-weight:bold;" href="{{url('/')}}">Home</a>
-                      </li>
-                    <li class="nav-item">
-                      <a class="nav-link active" style="color: red; font-weight:bold;" aria-current="page" href="{{url('/appointment')}}">Book an Appointment</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" style="color: red; font-weight:bold;" href="#">View Medical Reports</a>
-                    </li>
-                  </ul>
-            </span>
-          </div>
-        </div>
-      </nav>
-    <div class="div-style" style="width: 850px;">
+    <div class="d-flex justify-content-between p-4" id="btnRow">
+        <a class="btn btn-primary" href="#" onclick="window.history.back()" id="backBtn">Back</a>
+        <button class="btn btn-primary" id="printBtn" onclick="window.print()">Print</button>
+    </div>
+    <div class="div-style overflow-auto" id="wrapper" style="max-width: 850px;">
         <table class="table">
             <thead>
             </thead>
@@ -94,7 +73,7 @@
             </tbody>
         </table>
 
-        <div class="row">
+        <div class="">
             <div class="col-md-12 ms-auto para2">
                 ---------------------------------------Medical Examination Appointment Slip---------------------------------------
             </div>
@@ -154,7 +133,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="row">
+        <div class="">
             <div class="col-md-12 ms-auto para2">
                 ---------------------------------------Medical Center Information---------------------------------------
             </div>
@@ -235,15 +214,6 @@
             </tbody>
         </table>
     </div>
-    <form class="noprint">
-        <input type="button" value="Print" onclick="print_current_page()" />
-    </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script>
-    function print_current_page() {
-        window.print();
-    }
-</script>
 </body>
 </html>

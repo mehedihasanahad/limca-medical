@@ -234,7 +234,7 @@ class ReportController extends Controller
             ]);
 
         if(empty($medical_data)) {
-            return back()->with('error', "Report Not Found By Slip NO: $request->slip_no");
+            return back()->with('error', "Report Not Found By Slip NO: <strong>$request->slip_no</strong>");
         }
 
         return redirect("/medical-report/$request->slip_no");
