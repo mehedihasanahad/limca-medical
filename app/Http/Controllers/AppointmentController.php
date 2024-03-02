@@ -28,22 +28,22 @@ class AppointmentController extends Controller
 
         $medcal_id = $flag->key;
         $app = new Appointment();
-        
+
         $app->medical_id = $medcal_id;
 
         foreach ($mediList as $medical) {
             $last_id =  $medical->id;
         }
         $next = Medical::where('id', '>', $flag->key)->min('id');
-        
+
         if ($flag->key ==  $last_id) {
             $flag->key = $first;
         }else{
             $flag->key = $next;
         }
-        
 
-        $app->slip_no = mt_rand(1000000000,9999999999);
+
+        $app->slip_no = 'Limca-' . time() . mt_rand(1111, 9999); // unique slip no
         $app->first_name = $request->first_name;
         $app->last_name = $request->last_name;
         // $app->first_name = $request->first_name;

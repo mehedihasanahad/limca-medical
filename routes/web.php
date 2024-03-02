@@ -82,6 +82,8 @@ Route::get('report-list', 'ReportController@reportListAPI');
 Route::get('report-edit/{id}', 'ReportController@reportedit');
 Route::get('report-view/{id}', 'ReportController@reportViewPage');
 Route::post('report-update/{id}', 'ReportController@reportUpdate');
+Route::post('search-report', 'ReportController@searchBySlipNo');
+Route::get('medical-report/{slip_no}', 'ReportController@medicalReportView');
 
 
 require __DIR__.'/auth.php';

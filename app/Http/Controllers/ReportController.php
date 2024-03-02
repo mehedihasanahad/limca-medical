@@ -222,4 +222,45 @@ class ReportController extends Controller
         return view('report.report-view', compact('appointmentData', 'reportData'));
     }
 
+    public function searchBySlipNo(Request $request) {
+
+        $medical_data = MedicalReport::join('appointments', 'appointments.id', '=', 'medical_reports.appointment_id')
+            ->where('appointments.slip_no', $request->slip_no)
+            ->first([
+                'appointments.id as appointment_id',
+                'appointments.*',
+                'medical_reports.id as medical_report_id',
+                'medical_reports.*'
+            ]);
+
+        if(empty($medical_data)) {
+            return back()->with('error', "Report Not Found By Slip NO: $request->slip_no");
+        }
+
+        return redirect("/medical-report/$request->slip_no");
+    }
+
+    public function medicalReportView($slip_no) {
+        $medical_data = MedicalReport::leftJoin('appointments', 'appointments.id', '=', 'medical_reports.appointment_id')
+            ->where('appointments.slip_no', $slip_no)
+            ->first([
+                'appointments.id as appointment_id',
+                'appointments.*',
+                'medical_reports.id as medical_report_id',
+                'medical_reports.*'
+            ]);
+
+        $reportData = MedicalReport::where('id', $medical_data->medical_report_id)->first();
+
+        $appointmentData = Appointment::leftJoin('medicals', 'appointments.medical_id', '=', 'medicals.id')
+            ->where('appointments.id', $medical_data->appointment_id)
+            ->first([
+                'medicals.id as medical_data_id',
+                'medicals.*',
+                'appointments.*'
+            ]);
+
+        return view('report.searchedReportView', compact('appointmentData', 'reportData'));
+    }
+
 }
