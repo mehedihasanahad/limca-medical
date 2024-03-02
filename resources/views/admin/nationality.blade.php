@@ -1,0 +1,1 @@
+{{$row->nationality == null ? '' : App\Enums\CountryType::getKey((int)$row->nationality)}}

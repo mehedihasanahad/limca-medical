@@ -1,0 +1,29 @@
+.hide {
+	display: none;
+}
+
+form.patient-info-form label.col-md-3.label-control {
+	text-align: left;
+}
+
+.header-top-content {
+	width: 55rem;
+	padding: 10px;
+	color: white;
+	text-align: center;
+}
+
+#myTable1 thead, #myTable1 tfoot {
+  display: table-row-group;
+}
+#DataTables_Table_0 thead, #DataTables_Table_0 tfoot {
+  display: table-row-group;
+}
+
+form.form-horizontal.form-bordered label.col-md-3.label-control {
+	text-align: left;
+}
+#myTable1_length {
+	display: inline-block;
+	float: left;
+}
