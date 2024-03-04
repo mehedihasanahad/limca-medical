@@ -20,11 +20,11 @@
         </div>
         <br/>
         <br/>
-        <div class="row">
-            <div class="col-12">
-                @includeIf('admin.components.appointment-list')
-            </div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-12">--}}
+{{--                @includeIf('admin.components.appointment-list')--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 @endsection
 

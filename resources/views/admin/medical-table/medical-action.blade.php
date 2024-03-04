@@ -23,7 +23,7 @@
     </form>
     @endif
 @else
-    <a href="{{ url("appointment-list/$row->id") }}" class="btn btn-primary">Appointment List</a>
+    <a href="{{ url("appointment-list/$row->id") }}" class="btn btn-primary">Appointment And Report List</a>
 @endif
 
 

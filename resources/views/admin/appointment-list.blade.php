@@ -6,7 +6,7 @@
     <link href="{{asset('/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 @endpush
 @section('upper-headline')
-HOME/MEDICAL CENTRE LIST
+HOME/MEDICAL APPOINTMENT LIST
 @endsection
 @section('content')
     <div class="br-section-wrapper">
@@ -22,23 +22,13 @@ HOME/MEDICAL CENTRE LIST
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>ACTION</th>
+                  <th>DATE</th>
                   <th>Slip no</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Date of Birth</th>
-                  <th>Nationality</th>
-                  <th>Gender</th>
-                  <th>Passport Number</th>
-                  <th>Passport Issue Date</th>
-                  <th>Passport Issue Place</th>
-                  <th>Passport Expiry Date</th>
-                  <th>Visa Type</th>
-                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Passport</th>
                   <th>Phone</th>
-                  <th>National ID</th>
-                  <th>Position</th>
-                  <th>Other</th>
+                  <th>Gender</th>
                 </tr>
               </thead>
               <tbody>
@@ -74,23 +64,13 @@ HOME/MEDICAL CENTRE LIST
           }
       },
       columns: [
-              {data: 'id',name: 'id'},
+              {data: 'other',name: 'other'},
+              {data: 'appointment_date',name: 'appointment_date'},
               {data: 'slip_no',name: 'slip_no'},
-              {data: 'first_name',name: 'first_name'} ,
-              {data: 'last_name',name: 'last_name'} ,
-              {data: 'dob',name: 'dob'},
-              {data: 'nationality',name: 'nationality'},
-              {data: 'gender',name: 'gender'},
-              {data: 'marital_status',name: 'marital_status'},
+              {data: 'full_name',name: 'full_name'} ,
               {data: 'pass_number',name: 'pass_number'},
-              {data: 'pass_issue_date',name: 'pass_issue_date'},
-              {data: 'pass_expiry_date',name: 'pass_expiry_date'},
-              {data: 'visa_type',name: 'visa_type'},
-              {data: 'email_id',name: 'email_id'},
               {data: 'phone',name: 'phone'},
-              {data: 'national_id',name: 'national_id'},
-              {data: 'position',name: 'position'},
-              {data: 'other',name: 'other'}
+              {data: 'gender',name: 'gender'},
       ]
   });
 

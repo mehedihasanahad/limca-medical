@@ -39,6 +39,7 @@
                   @else
                     {{Auth::user()->name}}
                   @endif --}}
+                    {{Auth::user()->name}}
                 </span>
                 <img src="{{asset('/storage/images/avatar.jpg')}}" class="wd-32 rounded-circle" alt="">
                 <span class="square-10 bg-success"></span>

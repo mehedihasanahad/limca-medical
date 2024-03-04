@@ -7,12 +7,13 @@ use App\Models\Flag;
 use App\Models\Medical;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
     public function index($id)
     {
-        $appointment = Appointment::find($id);
+        $appointment = Appointment::where('id', $id)->first(['*', DB::raw('DATE(created_at) as appointment_date')]);
         $medical = Medical::find($appointment->medical_id);
         return view('appointmentpdf',compact('appointment','medical'));
     }
@@ -43,7 +44,7 @@ class AppointmentController extends Controller
         }
 
 
-        $app->slip_no = 'Limca-' . time() . mt_rand(1111, 9999); // unique slip no
+        $app->slip_no = 'LIMCA-' . mt_rand(111111, 999999); // unique slip no
         $app->first_name = $request->first_name;
         $app->last_name = $request->last_name;
         // $app->first_name = $request->first_name;

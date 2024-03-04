@@ -288,7 +288,7 @@
                     <input type="email" class="form-control" name="email_id" id="exampleFormControlInput1" placeholder="Your@mail.com">
                 </div>
                 <div class="col-md-4 ms-auto">
-                    <label for="exampleFormControlInput1" class="form-label">Phone N</label>
+                    <label for="exampleFormControlInput1" class="form-label">Phone No</label>
                     <input type="text" class="form-control" name="phone" id="exampleFormControlInput1">
                 </div>
                 <div class="col-md-4 ms-auto">

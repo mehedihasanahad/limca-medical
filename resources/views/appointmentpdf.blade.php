@@ -63,15 +63,20 @@
         <button class="btn btn-primary" id="printBtn" onclick="window.print()">Print</button>
     </div>
     <div class="div-style overflow-auto" id="wrapper" style="max-width: 850px;">
-        <table class="table">
-            <thead>
-            </thead>
-            <tbody>
-                <td><span class="span1">(LIMCA)</span></td>
-                <td><span>Libya Approved Medical Centre's Association</span></td>
-                <td><img src="{{asset('/images/Flag.png')}}" style="width: 100px; height:50px;" alt=""></td>
-            </tbody>
-        </table>
+        <div style="display: flex; justify-content: space-between; padding: 0 22px; align-items: center;">
+            <div>(LIMCA)</div>
+            <h4><strong>Libya Approved Medical Centre's Association</strong></h4>
+            <div><img src="{{asset('/images/Flag.png')}}" style="width: 100px; height:50px;" alt=""></div>
+        </div>
+{{--        <table class="table">--}}
+{{--            <thead>--}}
+{{--            </thead>--}}
+{{--            <tbody>--}}
+{{--                <td><span class="span1">(LIMCA)</span></td>--}}
+{{--                <td><span>Libya Approved Medical Centre's Association</span></td>--}}
+{{--                <td><img src="{{asset('/images/Flag.png')}}" style="width: 100px; height:50px;" alt=""></td>--}}
+{{--            </tbody>--}}
+{{--        </table>--}}
 
         <div class="">
             <div class="col-md-12 ms-auto para2">
@@ -109,7 +114,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 7px;">Country traveling to</td>
-                    <td style="padding: 0 7px;"></td>
+                    <td style="padding: 0 7px;">Libia</td>
                     <td style="padding: 0 7px;">Date of Birth</td>
                     <td style="padding: 0 7px;">{{$appointment->dob == null ? '':$appointment->dob}}</td>
                 </tr>
@@ -193,7 +198,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 7px;">Friday</td>
-                    <td style="padding: 0 7px;">9:00 AM - 5:00PM</td>
+                    <td style="padding: 0 7px;">Closed</td>
                 </tr>
                 <tr>
                     <td style="padding: 0 7px;">Saturday</td>
@@ -209,7 +214,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 7px;">Generated date</td>
-                    <td style="padding: 0 7px;">{{date("Y/m/d")}}</td>
+                    <td style="padding: 0 7px;">{{$appointment->appointment_date}}</td>
                 </tr>
             </tbody>
         </table>

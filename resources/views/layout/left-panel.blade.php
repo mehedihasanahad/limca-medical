@@ -43,24 +43,36 @@
                  @php
                     $medical_id = DB::table('user_medicals')->where('user_id', Auth::user()->id)->orderByDesc('id')->first()->medical_id;
                  @endphp
-                <li class="br-menu-item">
-                     <a href="#" class="br-menu-link with-sub">
+                 <li class="br-menu-item">
+                     <a href='{{url("/appointment-list/".$medical_id)}}' class="br-menu-link">
                          <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
                          <span class="menu-item-label">Appointments</span>
                      </a><!-- br-menu-link -->
-                     <ul class="br-menu-sub">
-                         <li class="sub-item"><a href='{{url("/appointment-list/".$medical_id)}}' class="sub-link">Appointment List</a></li>
-                     </ul>
-                </li>
-                <li class="br-menu-item">
-                 <a href="#" class="br-menu-link with-sub">
-                     <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
-                     <span class="menu-item-label">Reports</span>
-                 </a><!-- br-menu-link -->
-                 <ul class="br-menu-sub">
-                     <li class="sub-item"><a href='{{url("/reports/list")}}' class="sub-link">Report list</a></li>
-                 </ul>
-             </li>
+                 </li>
+{{--                <li class="br-menu-item">--}}
+{{--                     <a href="#" class="br-menu-link with-sub">--}}
+{{--                         <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>--}}
+{{--                         <span class="menu-item-label">Appointments</span>--}}
+{{--                     </a><!-- br-menu-link -->--}}
+{{--                     <ul class="br-menu-sub">--}}
+{{--                         <li class="sub-item"><a class="sub-link">Appointment List</a></li>--}}
+{{--                     </ul>--}}
+{{--                </li>--}}
+                 <li class="br-menu-item">
+                     <a href='{{url("/reports/list")}}' class="br-menu-link">
+                         <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
+                         <span class="menu-item-label">Reports</span>
+                     </a><!-- br-menu-link -->
+                 </li>
+{{--                <li class="br-menu-item">--}}
+{{--                 <a href="#" class="br-menu-link with-sub">--}}
+{{--                     <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>--}}
+{{--                     <span class="menu-item-label">Reports</span>--}}
+{{--                 </a><!-- br-menu-link -->--}}
+{{--                 <ul class="br-menu-sub">--}}
+{{--                     <li class="sub-item"><a href='{{url("/reports/list")}}' class="sub-link">Report list</a></li>--}}
+{{--                 </ul>--}}
+{{--             </li>--}}
              @endif
           {{-- @if (Auth::user()->user_type == 2)
             <li class="br-menu-item">

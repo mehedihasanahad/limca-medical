@@ -6,6 +6,7 @@ use App\Models\Appointment;
 use App\Models\MedicalReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class ReportController extends Controller
@@ -112,11 +113,13 @@ class ReportController extends Controller
         $data = MedicalReport::leftJoin('appointments', 'appointments.id', '=', 'medical_reports.appointment_id')->get([
             'appointments.id as appointment_data_id',
             'appointments.*',
-            'medical_reports.*'
+            'medical_reports.*',
+            DB::raw('DATE(medical_reports.created_at) as report_date'),
+            DB::raw("CONCAT_WS(' ', appointments.first_name, appointments.last_name) as full_name")
         ]);
         return DataTables::of($data)->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                return '<a href="'.'/report-edit/'.$row->id.'"><button class="btn btn-primary">Edit</button></a> <a href="'.'/report-view/'.$row->id.'"><button class="btn btn-primary">View</button></a>';
+                return '<a href="'.'/report-edit/'.$row->id.'"><button class="btn btn-primary mb-2">Edit</button></a> <a href="'.'/report-view/'.$row->id.'"><button class="btn btn-primary mb-2">View</button></a>';
             })
             ->rawColumns(['actions'])
             ->make(true);

@@ -42,7 +42,7 @@
     </style>
 
     <div class="d-flex justify-content-between p-4">
-        <a class="btn btn-primary" href="{{url('/')}}" id="backBtn">Back</a>
+        <button class="btn btn-primary" id="backBtn" onclick="window.history.back()">Back</button>
         <button class="btn btn-primary" id="printBtn" onclick="window.print()">Print</button>
     </div>
 

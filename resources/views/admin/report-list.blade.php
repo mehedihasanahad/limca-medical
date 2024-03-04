@@ -6,9 +6,15 @@
     <link href="{{asset('/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 @endpush
 @section('upper-headline')
+    @php
+        $medical_id = DB::table('user_medicals')->where('user_id', Auth::user()->id)->value('medical_id');
+        $medical_name = DB::table('medicals')->where('id', $medical_id)->value('medical_centre_name');
+    @endphp
     HOME/Report LIST
+    <h3>{{$medical_name}}</h3>
 @endsection
 @section('content')
+
     <div class="br-section-wrapper">
         @if (session('status'))
             <div class="alert alert-info" role="alert">
@@ -22,15 +28,13 @@
             <table class="table table-bordered data-table">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>ACTION</th>
+                    <th>DATE</th>
                     <th>Slip no</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Gender</th>
-                    <th>Passport Number</th>
-                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Passport</th>
                     <th>Phone</th>
-                    <th>Actions</th>
+                    <th>Gender</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,15 +65,13 @@
                     }
                 },
                 columns: [
-                    {data: 'id',name: 'id'},
+                    {data: 'actions',name: 'actions'},
+                    {data: 'report_date',name: 'report_date'},
                     {data: 'slip_no',name: 'slip_no'},
-                    {data: 'first_name',name: 'first_name'} ,
-                    {data: 'last_name',name: 'last_name'} ,
+                    {data: 'full_name',name: 'full_name'} ,
                     {data: 'gender',name: 'gender'},
                     {data: 'pass_number',name: 'pass_number'},
-                    {data: 'email_id',name: 'email_id'},
                     {data: 'phone',name: 'phone'},
-                    {data: 'actions',name: 'actions'}
                 ]
             });
 

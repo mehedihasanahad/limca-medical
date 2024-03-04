@@ -28,7 +28,7 @@
                       @enderror
                     </div>
                 </div><!-- row -->
- 
+
                 <div class="row mg-t-20">
                   <label class="col-sm-4 form-control-label">Password: <span class="tx-danger">*</span></label>
                   <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -40,11 +40,11 @@
                 </div>
                 <div class="form-layout-footer mg-t-30">
                   <button class="btn btn-info">Submit Form</button>
-                  <button class="btn btn-secondary">Cancel</button>
+                  <a class="btn btn-secondary" href="{{url('/dashboard')}}">Cancel</a>
                 </div><!-- form-layout-footer -->
               </div><!-- form-layout -->
             </div><!-- col-6 -->
-          </div> 
-        </form>  
+          </div>
+        </form>
     </div>
 @endsection

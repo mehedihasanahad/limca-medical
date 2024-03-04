@@ -43,6 +43,9 @@
     </style>
 
     <form action="/report-update/{{$reportData['id']}}" method="post" enctype="multipart/form-data">
+        <div class="d-flex justify-content-end p-4">
+            <a href="{{url('/medical-report/'.($appointmentData['slip_no'] ?? ''))}}" class="btn btn-primary" id="printBtn">Print</a>
+        </div>
         @csrf
         <table>
             <tr>
