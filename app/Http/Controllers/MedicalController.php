@@ -36,15 +36,21 @@ class MedicalController extends Controller
             'medical_centre_mobile' => 'required',
             'medical_centre_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
-        $logo_path = null;
+//        $logo_path = null;
         $medical_centre_id = 'M-'.time();
-        if($request->hasFile('medical_centre_logo'))
-        {
-            $imageName = $medical_centre_id . '.' . $request->medical_centre_logo->extension();
-            $path = '/images/';
-            $imageName = strtr($imageName, '/', '-');
-            move_uploaded_file($request->medical_centre_logo,$path.$imageName);
+//        if($request->hasFile('medical_centre_logo'))
+//        {
+//            $imageName = $medical_centre_id . '.' . $request->medical_centre_logo->extension();
+//            $path = '/images/';
+//            $imageName = strtr($imageName, '/', '-');
+//            move_uploaded_file($request->medical_centre_logo,$path.$imageName);
+//        }
+
+        if($request->medical_centre_logo && gettype($request->medical_centre_logo) != 'string') {
+            $fileName = time().'.'.$request->medical_centre_logo->getClientOriginalExtension();
+            $request->medical_centre_logo->move(public_path('/images/medicals'), $fileName);
         }
+
         $medical_center = new Medical();
         $medical_center->medical_centre_name = $request->medical_centre_name;
         $medical_center->medical_centre_email = $request->medical_centre_email;
@@ -52,7 +58,9 @@ class MedicalController extends Controller
         $medical_center->medical_centre_address = $request->medical_centre_address;
         $medical_center->medical_centre_mobile = $request->medical_centre_mobile;
         $medical_center->website = $request->website;
-        $medical_center->medical_centre_logo = $path.$imageName;
+        if($request->medical_centre_logo && gettype($request->medical_centre_logo) != 'string') {
+            $medical_center->medical_centre_logo = '/public/images/medicals/'.$fileName;
+        }
         $medical_center->save();
 
         return redirect()->back()->with('status', 'Successfully Created!');
