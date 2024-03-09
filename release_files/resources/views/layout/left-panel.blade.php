@@ -41,14 +41,7 @@
                 </ul>
               </li><!-- br-menu-item -->
               @endif
-                 @php
-                     $medical = '';
-                     if(!empty(request()->route()->parameters['id'])) {
-                      $medical = DB::table('medicals')->where('id', request()->route()->parameters['id'])->first();
-                     };
-                 @endphp
-
-                 @if (Auth::user()->is_admin == 1 && Auth::user()->role == 1 && (empty($medical) || $medical->is_active))
+             @if (Auth::user()->is_admin == 1 && Auth::user()->role == 1 && Auth::user()->is_active)
                  @php
                     $medical_id = DB::table('user_medicals')->where('user_id', Auth::user()->id)->orderByDesc('id')->first()->medical_id;
                  @endphp
