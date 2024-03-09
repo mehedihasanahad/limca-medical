@@ -20,12 +20,18 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $last_submited_appointment = Appointment::latest()->first();
+        $next_medical_after_last_submitted_medical = Medical::where('is_active', 1)->first();
+        if ($last_submited_appointment) {
+            $next_medical_after_last_submitted_medical = Medical::where('id', '>', $last_submited_appointment->medical_id)->where('is_active', 1)->first();
 
-        $next_medical_after_last_submitted_medical = Medical::where('id', '>', $last_submited_appointment->medical_id)->where('is_active', 1)->first();
-
-        if(empty($next_medical_after_last_submitted_medical)) {
-            $next_medical_after_last_submitted_medical = Medical::first();
+            if(empty($next_medical_after_last_submitted_medical)) {
+                $next_medical_after_last_submitted_medical = Medical::first();
+            }
         }
+
+
+
+
 //
 //        $mediArray = [];
 //        $flag = Flag::find(1);

@@ -36,7 +36,7 @@ class ListController extends Controller
     public function userlist(Request $request)
     {
       if ($request->ajax()) {
-            $data = User::select("*")->where('is_admin',1)->get();
+            $data = User::select("*")->where('is_admin', '!=', 0)->get();
             return DataTables::of($data)->addIndexColumn()
             ->addColumn('id', function ($row) {
                     return view("admin.user-table.user-action",compact("row"));
@@ -58,12 +58,13 @@ class ListController extends Controller
     {
         if ($request->ajax()) {
             $data = Appointment::where('medical_id',$request->medical_id)
-                ->whereBetween('created_at', [$request->from_date, $request->end_date])
-                ->get([
+            ->whereBetween(DB::raw('DATE(created_at)'), [$request->from_date, $request->end_date])
+            ->get([
                 '*',
                 DB::raw('DATE(created_at) as appointment_date'),
                 DB::raw("CONCAT_WS(' ', first_name, last_name) as full_name")
             ]);
+
             return DataTables::of($data)->addIndexColumn()
             ->addColumn('nationality', function ($row) {
                 return view("admin.nationality",compact("row"));
@@ -74,10 +75,10 @@ class ListController extends Controller
             ->addColumn('other', function ($row) {
                 $reportData = MedicalReport::where('appointment_id', $row->id)->first();
                 if(Auth::user()->role == 1 && empty($reportData)) {
-                    return '<a href="'.'/report-entry/'.$row->id.'"><button class="btn btn-primary mr-2 mb-2">Entry Report</button></a><a href="'.'/appointment-pdf/'.$row->id.'"><button class="btn btn-primary">View Appointment</button></a>';
+                    return '<div class="d-flex" style="gap: 5px;"><a href="'.'/report-entry/'.$row->id.'"><button class="btn btn-primary mr-2">Entry Report</button></a><a href="'.'/appointment-pdf/'.$row->id.'"><button class="btn btn-primary">View Appointment</button></a></div>';
                 }
                 if (!empty($reportData)) {
-                    return '<a href="'.'/report-view/'.$reportData->id.'"><button class="btn btn-primary mr-2 mb-2">View Report</button></a><a href="'.'/appointment-pdf/'.$row->id.'"><button class="btn btn-primary">View Appointment</button></a>';
+                    return '<div class="d-flex" style="gap: 5px;"><a href="'.'/report-view/'.$reportData->id.'"><button class="btn btn-primary">View Report</button></a><a href="'.'/appointment-pdf/'.$row->id.'"><button class="btn btn-primary">View Appointment</button></a></div>';
                 }
                 return '<a href="'.'/appointment-pdf/'.$row->id.'"><button class="btn btn-primary">View Appointment</button></a>';
             })

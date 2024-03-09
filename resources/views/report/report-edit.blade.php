@@ -349,7 +349,8 @@
 
             <tr>
                 <td colspan="7">
-                    <img src="{{asset('images/barcode.png')}}" style="height: 60px; width: 200px; object-fit: cover;" alt="" />
+{{--                    <img src="{{asset('images/barcode.png')}}" style="height: 60px; width: 200px; object-fit: cover;" alt="" />--}}
+                    <p>{!! DNS1D::getBarcodeHTML(($appointmentData['slip_no'] ?? ''), 'C39') !!}</p>
                     <h1 style="display: inline-block; margin-left: 270px;" id="physical_status">
                         @if($reportData['physical_condition'] == 1)
                             FIT

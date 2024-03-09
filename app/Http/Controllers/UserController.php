@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
@@ -40,11 +41,14 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->role = $request->role;
+        $user->is_active = 1;
+        $user->is_admin = 1;
         // $user->user_type = 2;
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->has('medical_center_id')) {
-            $user->medicals()->attach($request->medical_center_id);
+            DB::table('user_medicals')->insert(['user_id' => $user->id, 'medical_id' => $request->medical_center_id, 'created_at' => null, 'updated_at' => null]);
+            // $user->medicals()->attach($request->medical_center_id);
         }
 
         return redirect()->back()->with('status', 'Successfully Created!');
@@ -79,23 +83,16 @@ class UserController extends Controller
         if ($request->password != null) {
             $user->password = Hash::make($request->password);
         }
-       
+
         if ($request->role == 1 && $user->role == 1) {
-            if ($user->medicals[0]->id != $request->medical_center_id) {
-                $user->medicals()->detach($user->medicals[0]->id);
-                $user->medicals()->attach($request->medical_center_id);
-            }
-        } else {
-            if (empty($user->medicals[0]) == false) {
-                $user->medicals()->detach($user->medicals[0]->id);
-            }
-            if ($request->role == 1) {
-                $user->medicals()->attach($request->medical_center_id);
-            }
+
+            DB::table('user_medicals')->where('user_id', $user->id)->delete();
+
+            DB::table('user_medicals')->insert(['user_id' => $user->id, 'medical_id' => $request->medical_center_id, 'created_at' => null, 'updated_at' => null]);
         }
         $user->role = $request->role;
         $user->save();
-        
+
 
         return redirect()->back()->with('status', 'Successfully Updated!');
     }

@@ -80,12 +80,12 @@ HOME/ADD USERS
                 </div>
                 <div class="form-layout-footer mg-t-30">
                   <button class="btn btn-info">Submit Form</button>
-                  <a class="btn btn-secondary" href="{{asset("admin/dashboard")}}" style="color:white;">Cancel</a>
+                  <a class="btn btn-secondary" href="{{url("/users")}}" style="color:white;">Cancel</a>
                 </div><!-- form-layout-footer -->
               </div><!-- form-layout -->
             </div><!-- col-6 -->
-          </div> 
-        </form>  
+          </div>
+        </form>
     </div>
 @endsection
 
@@ -104,7 +104,7 @@ HOME/ADD USERS
             $("#medical_label").hide();
             $("#medical_center_id").hide();
             document.getElementById("medical_center_id").required = false;
-          } 
+          }
         });
     </script>
 @endpush

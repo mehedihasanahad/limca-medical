@@ -1,1 +1,0 @@
-{{ $row->position == null ? '' : App\Enums\PositionType::getKey((int)$row->position)}}

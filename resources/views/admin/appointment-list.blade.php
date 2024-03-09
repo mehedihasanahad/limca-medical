@@ -14,7 +14,7 @@ HOME/MEDICAL APPOINTMENT LIST
 <h3>{{$medical_name}}</h3>
 @endsection
 @section('content')
-    @if(Auth::user()->is_admin == 1 && Auth::user()->role == 1 && Auth::user()->is_active)
+    @if((Auth::user()->is_admin == 1 && Auth::user()->role == 1 && Auth::user()->is_active) || (Auth::user()->is_admin == 0))
         <div class="br-section-wrapper">
       @if (session('status'))
         <div class="alert alert-info" role="alert">

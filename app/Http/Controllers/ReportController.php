@@ -37,7 +37,7 @@ class ReportController extends Controller
     public function reportStore(Request $request, $id) {
         try {
             $medical_id = Appointment::where('id', $id)->select(['medical_id'])->first()->medical_id;
-            if(gettype($request->profile_image) != 'string') {
+            if(gettype($request->profile_image) == 'object') {
                 $fileName = time().'.'.$request->profile_image->getClientOriginalExtension();
                 $request->profile_image->move(public_path('/images/reports'), $fileName);
             }
@@ -92,7 +92,7 @@ class ReportController extends Controller
             $medicalReport->blood_vdrl_result = $request->blood_vdrl_result;
             $medicalReport->blood_tpha_result = $request->blood_tpha_result;
             $medicalReport->appointment_id = $id;
-            if(gettype($request->profile_image) != 'string') {
+            if(gettype($request->profile_image) == 'object') {
                 $medicalReport->profile_image = '/images/reports/'.$fileName;
             }
             $medicalReport->created_by = Auth::user()->id;
@@ -111,7 +111,7 @@ class ReportController extends Controller
 
     public function reportListAPI(Request $request) {
         $data = MedicalReport::leftJoin('appointments', 'appointments.id', '=', 'medical_reports.appointment_id')
-            ->whereBetween('medical_reports.created_at', [$request->from_date, $request->end_date])
+            ->whereBetween(DB::raw('DATE(medical_reports.created_at)'), [$request->from_date, $request->end_date])
             ->get([
             'appointments.id as appointment_data_id',
             'appointments.*',

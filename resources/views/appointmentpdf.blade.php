@@ -214,7 +214,9 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 7px;">Barcode</td>
-                    <td style="padding: 0 7px;">{!! DNS1D::getBarcodeHTML($appointment->slip_no, 'PHARMA') !!}</td>
+                    <td style="padding: 0 7px;">
+                        <p>{!! DNS1D::getBarcodeHTML(($appointment->slip_no ?? ''), 'C39') !!}</p>
+                    </td>
                 </tr>
                 <tr>
                     <td style="padding: 0 7px;">Generated date</td>
